@@ -15,7 +15,7 @@ User = get_user_model()
 # --  VIEWS -- #
 def index(request):
     context = {
-        'title': 'Profile'
+        'title': 'Index'
     }
     return render(request, 'control/index.html', context=context)
 
