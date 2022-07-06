@@ -1,0 +1,15 @@
+{% extends "control/base.html" %}
+
+{% block main %}
+<div class="login">
+    <h1 class="login__header">Автентифікація</h1>
+
+    <form class="login__form" method="post">
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <button type="submit">Log In</button>
+    </form>
+</div>
+{% endblock %}
