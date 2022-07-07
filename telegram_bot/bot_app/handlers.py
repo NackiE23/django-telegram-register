@@ -6,10 +6,9 @@ from aiogram.types import Message, ReplyKeyboardRemove
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
 
-from .app import dp
+from .app import dp, REGISTRATION_API_URL
 from .register import Register
 from .keyboards import confirmation_keyboard
-from .local_settings import REGISTRATION_API_URL
 
 
 @dp.message_handler(commands=['start', 'help'])
