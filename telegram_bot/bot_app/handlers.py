@@ -65,7 +65,9 @@ async def confirmation(message: Message, state: FSMContext):
             await message.answer("Server is dead", reply_markup=ReplyKeyboardRemove())
             await state.finish()
         else:
-            await message.answer(f"Congratulations! You successfuly registered! \n{data}", reply_markup=ReplyKeyboardRemove())
+            await message.answer(f"Congratulations! You're successfuly registered! \n"
+                                 f"You can login using this link http://nackie23.pythonanywhere.com/login/",
+                                 reply_markup=ReplyKeyboardRemove())
             await state.finish()
     else:
         await message.answer("Okay! Have a nice day.", reply_markup=ReplyKeyboardRemove())
