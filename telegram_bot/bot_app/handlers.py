@@ -7,7 +7,7 @@ from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
 
 from .app import dp, REGISTRATION_API_URL
-from .register import Register
+from .stategroups import Register
 from .keyboards import confirmation_keyboard
 
 
