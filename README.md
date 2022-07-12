@@ -1,1 +1,1 @@
-# django-telegram-test
+# django-telegram-register
