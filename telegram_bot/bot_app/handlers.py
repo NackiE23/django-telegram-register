@@ -1,4 +1,5 @@
-import requests
+import aiohttp
+import asyncio
 
 from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters import Text
@@ -60,14 +61,15 @@ async def confirmation(message: Message, state: FSMContext):
             'name': message.from_user.first_name,
         })
         try:
-            requests.post(REGISTRATION_API_URL, json=data)
-        except requests.exceptions.ConnectionError:
+            async with aiohttp.ClientSession() as session:
+                async with session.post(REGISTRATION_API_URL, data=data):
+                    await message.answer(f"Congratulations! You're successfuly registered! \n"
+                                         f"You can login using this link http://nackie23.pythonanywhere.com/login/",
+                                         reply_markup=ReplyKeyboardRemove())
+                    await state.finish()
+                await session.close()
+        except aiohttp.ClientConnectorError:
             await message.answer("Server is dead", reply_markup=ReplyKeyboardRemove())
-            await state.finish()
-        else:
-            await message.answer(f"Congratulations! You're successfuly registered! \n"
-                                 f"You can login using this link http://nackie23.pythonanywhere.com/login/",
-                                 reply_markup=ReplyKeyboardRemove())
             await state.finish()
     else:
         await message.answer("Okay! Have a nice day.", reply_markup=ReplyKeyboardRemove())

@@ -63,14 +63,16 @@ class UserSerializer(ModelSerializer):
 
 # --  API -- #
 class UserAPICreate(APIView):
-    def get(self, request):
-        users = User.objects.all()
-        serialized_users = UserSerializer(users, many=True).data
-        return Response(serialized_users)
-
     def post(self, request):
         serializer = UserSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
 
         return Response({'post': serializer.data})
+
+
+class UserAPIView(APIView):
+    def get(self, request):
+        users = User.objects.all()
+        serialized_users = UserSerializer(users, many=True).data
+        return Response(serialized_users)
